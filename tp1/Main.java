@@ -9,7 +9,6 @@ import tp1.logic.Level;
 import tp1.view.Messages;
 import static tp1.view.Messages.error;
 
-// hola nico 
 public class Main {
 
 	/**

@@ -31,7 +31,7 @@ public class Game {
 
 	public String positionToString(int col, int row) {
 		//TODO fill your code
-		return null;
+		return "      ";
 	}
 
 	public boolean playerWin() {

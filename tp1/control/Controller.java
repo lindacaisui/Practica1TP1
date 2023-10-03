@@ -44,13 +44,14 @@ public class Controller {
 	 */
 	public void run() {
 		//TODO fill your code
+		this.printGame();
 	}
 
 	/**
 	 * Draw / paint the game
 	 */
 	private void printGame() {
-		System.out.println(printer);
+		System.out.println(printer.toString());
 	}
 	
 	/**
