@@ -45,6 +45,7 @@ public class Controller {
 	public void run() {
 		//TODO fill your code
 		this.printGame();
+		
 	}
 
 	/**

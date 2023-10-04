@@ -12,6 +12,9 @@ public class Game {
 
 	public Game(Level level, long seed) {
 		//TODO fill your code
+		Position pos = new Position();
+		System.out.println(pos.get_col());
+		System.out.println(pos.get_fil());
 	}
 
 	public String stateToString() {

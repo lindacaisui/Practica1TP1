@@ -11,5 +11,22 @@ public class Position {
 	private int row;
 
 	//TODO fill your code
-
+	public Position() {
+		this.col = 0;
+		this.row = 0;
+		
+	}
+	
+	public Position(int column, int row) {
+		this.col = column;
+		this.row = row;
+	}
+	
+	public int get_col() {
+		return (this.col);
+	}
+	
+	public int get_fil() {
+		return (this.row);
+	}
 }
