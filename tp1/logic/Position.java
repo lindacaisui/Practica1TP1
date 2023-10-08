@@ -13,8 +13,7 @@ public class Position {
 	//TODO fill your code
 	public Position() {
 		this.col = 0;
-		this.row = 0;
-		
+		this.row = 0;	
 	}
 	
 	public Position(int column, int row) {
@@ -28,5 +27,13 @@ public class Position {
 	
 	public int get_fil() {
 		return (this.row);
+	}
+	
+	public boolean equals(Position pos) {
+		return (this.col == pos.col && this.row == pos.row);
+	}
+	
+	public Position clone() {
+		return (new Position(this.col, this.row));
 	}
 }
