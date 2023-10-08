@@ -50,8 +50,10 @@ public class UCMShip {
 		if (this.isOut()) {
 			System.out.print("No es un movimiento valido!\n");
 			this.pos = new Position(pos.get_col() - move.getX(), pos.get_fil() - move.getY());
+			
 			return (false);
 		}
+		
 		return (true);
 	}
 	
@@ -64,7 +66,9 @@ public class UCMShip {
 	}
 	
 	public String stateToString() {
-		String state = new String();
+		String state = new String(this.getInfo());
+		
+		return (state);
 	}
 	
 	protected String getInfo() {
