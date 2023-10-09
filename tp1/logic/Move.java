@@ -25,6 +25,4 @@ public enum Move {
 
 
 	//TODO fill your code
-	
-	
-}
+

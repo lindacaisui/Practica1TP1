@@ -4,7 +4,6 @@ package tp1.logic;
 import tp1.logic.gameobjects.RegularAlien;
 //import tp1.logic.lists.DestroyerAlienList;
 import tp1.logic.lists.RegularAlienList;
-
 /**
  * 
  * Manages alien initialization and
@@ -35,7 +34,8 @@ public class AlienManager {
 	 */
 	protected RegularAlienList initializeRegularAliens() {
 		//TODO fill your code
-		return null;
+		RegularAlienList regularAlienList = new RegularAlienList();
+		return regularAlienList;
 	}
 
 	/**
@@ -45,7 +45,10 @@ public class AlienManager {
 //	protected  DestroyerAlienList initializeDestroyerAliens() {
 //		//TODO fill your code
 //	}
-
+	protected DestroyerAlienList initializeDestroyerAliens() {
+        DestroyerAlienList destroyerAlienList = new DestroyerAlienList();
+return destroyerAlienList;
+	}
 	
 	// CONTROL METHODS
 		

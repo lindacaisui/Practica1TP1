@@ -29,7 +29,6 @@ public enum Level {
 
 	
 	//TODO fill your code
-
 	/**
 	 * Returns UFO frequency corresponding the Level
 	 * @return UFO Frequency
