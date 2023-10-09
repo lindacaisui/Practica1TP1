@@ -7,6 +7,15 @@ public class Game {
 
 	public static final int DIM_X = 9;
 	public static final int DIM_Y = 8;
+	private int currentCycle;
+	private Random rand;
+	private Level level;
+	private long seed;
+	private RegularAlienList regularAliens;
+	private UCMShip player;
+	private UCMLaser laser;
+	private boolean doExit;
+	private AlienManager alienManager;
 
 	//TODO fill your code
 
@@ -16,6 +25,17 @@ public class Game {
 		System.out.println(pos.get_col());
 		System.out.println(pos.get_fil());
 	}
+	
+	private void initGame() {
+		
+	}
+	
+	public void reset() {
+		currentCycle=0;
+		// TODO implementar el resto
+	}
+	
+	
 
 	public String stateToString() {
 		//TODO fill your code
@@ -24,7 +44,7 @@ public class Game {
 
 	public int getCycle() {
 		//TODO fill your code
-		return 0;
+		return this.currentCycle;
 	}
 
 	public int getRemainingAliens() {
@@ -53,12 +73,12 @@ public class Game {
 
 	public Random getRandom() {
 		//TODO fill your code
-		return null;
+		return this.rand;
 	}
 
 	public Level getLevel() {
 		//TODO fill your code
-		return null;
+		return this.level;
 	}
 
 }
