@@ -45,6 +45,21 @@ public class Controller {
 	public void run() {
 		//TODO fill your code
 		this.printGame();
+		while(true) {
+			String[] args = prompt();
+			
+			switch(args[0]) {
+			case "m":
+			case "move":
+				Move move = Move.valueOf(args[1].toUpperCase());
+				if(game.move(move)) {
+					game.update();
+				}
+				break;
+			default:
+				break;
+			}
+		}
 		
 	}
 

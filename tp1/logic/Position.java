@@ -20,7 +20,10 @@ public class Position {
 		this.col = column;
 		this.row = row;
 	}
-	
+	public Position(Position pos) {
+		this.col = pos.col;
+		this.row = pos.row;
+	}
 	public int get_col() {
 		return (this.col);
 	}
@@ -29,11 +32,23 @@ public class Position {
 		return (this.row);
 	}
 	
-	public boolean equals(Position pos) {
-		return (this.col == pos.col && this.row == pos.row);
+	public Position add(int i, int j) {
+		return new Position(col + i, row + j);	
 	}
 	
-	public Position clone() {
-		return (new Position(this.col, this.row));
+	public Position move(Move mov) {
+		return new Position(col + mov.getX(), row + mov.getY()); 
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(obj == null) return false;
+		if(getClass() !=obj.getClass()) return false;
+		
+		// obj es Position
+		Position other = (Position) obj;
+		return (col == other.col && row == other.row);
+	}
+	
 }

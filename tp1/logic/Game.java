@@ -2,6 +2,8 @@ package tp1.logic;
 
 import java.util.Random;
 
+import tp1.logic.gameobjects.UCMShip;
+
 // TODO implementarlo
 public class Game {
 
@@ -20,6 +22,7 @@ public class Game {
 	//TODO fill your code
 
 	private void initGame() {
+		player = new UCMShip(this,new Position(DIM_X / 2, DIM_Y - 1));
 		
 	}
 	
@@ -52,7 +55,12 @@ public class Game {
 	
 	public String positionToString(int col, int row) {
 		//TODO fill your code
-		return "      ";
+		Position pos = new Position(col, row);
+		
+		if(pos.equals(player.getPosition())) {
+		return player.toString();
+		}
+		return "";
 	}
 
 	
@@ -150,9 +158,9 @@ public class Game {
 	
 	public Game(Level level, long seed) {
 		//TODO fill your code
-		Position pos = new Position();
-		System.out.println(pos.get_col());
-		System.out.println(pos.get_fil());
+		this.level = level;
+		this.seed = seed;
+		initGame();
 	}
 
 
