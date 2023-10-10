@@ -19,16 +19,20 @@ public class Game {
 
 	//TODO fill your code
 
-	public Game(Level level, long seed) {
-		//TODO fill your code
-		Position pos = new Position();
-		System.out.println(pos.get_col());
-		System.out.println(pos.get_fil());
-	}
-	
 	private void initGame() {
 		
 	}
+	
+	public Random getRandom() {
+		//TODO fill your code
+		return this.rand;
+	}
+	
+	public Level getLevel() {
+		//TODO fill your code
+		return this.level;
+	}
+
 	
 	public void reset() {
 		currentCycle=0;
@@ -36,49 +40,125 @@ public class Game {
 	}
 	
 	
-
-	public String stateToString() {
-		//TODO fill your code
-		return null;
-	}
-
 	public int getCycle() {
 		//TODO fill your code
 		return this.currentCycle;
 	}
 
-	public int getRemainingAliens() {
-		//TODO fill your code
-		return 0;
+	
+	public void addObject() {
+		
 	}
-
+	
 	public String positionToString(int col, int row) {
 		//TODO fill your code
 		return "      ";
 	}
 
+	
+	public void isFinished() {
+		
+	}
+	
+	public boolean aliensWin() {
+		//TODO fill your code
+		return false;
+	}
+	
 	public boolean playerWin() {
 		//TODO fill your code
 		return false;
 	}
 
-	public boolean aliensWin() {
-		//TODO fill your code
-		return false;
+	
+	public void update() {
+		
 	}
+	
+	private void removeDead() {
+		
+	}
+	
+	private void computerActions() {
+		
+	}
+	
+	private void laserAutomaticMove() {
+		
+	}
+	
+	private void automaticMoves() {
+		
+	}
+	
+	public void  exit() {
+		
+	}
+	
+	public void infoToString() {
+		
+	}
+	
+	public void listOfShips() {
+		
+	}
+	
+	public void move() {
+		
+	}
+	
+	public void shootLaser() {
+		
+	}
+	
+	public void shockWave() {
+		
+	}
+	
+	public void receivePoints() {
+		
+	}
+	
+	public void getNumCyclesToMoveOneCell() {
+		
+	}
+	
+	private void haveLanded() {
+		
+	}
+	
+	public int getRemainingAliens() {
+		//TODO fill your code
+		return 0;
+	}
+
+	
+	public void performAttack() {
+		
+	}
+	
+	public void checkAttacksTo() {
+		
+	}
+	
+	public String stateToString() {
+		//TODO fill your code
+		return null;
+	}
+
+	
+	
+	public Game(Level level, long seed) {
+		//TODO fill your code
+		Position pos = new Position();
+		System.out.println(pos.get_col());
+		System.out.println(pos.get_fil());
+	}
+
+
 
 	public void enableLaser() {
 		//TODO fill your code		
-	}
-
-	public Random getRandom() {
-		//TODO fill your code
-		return this.rand;
-	}
-
-	public Level getLevel() {
-		//TODO fill your code
-		return this.level;
 	}
 
 }
