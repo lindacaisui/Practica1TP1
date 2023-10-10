@@ -3,6 +3,7 @@ package tp1.logic.gameobjects;
 import tp1.logic.Game;
 import tp1.logic.Move;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 /**
  * 
@@ -12,8 +13,50 @@ import tp1.logic.Position;
 public class UCMLaser {
 	
 	//TODO fill your code
+	private final static int DAMAGE = 1;
+	private final static int ARMOR = 1;
+	private Position pos;
+	private int life;
 	private Move dir;
 	private Game game;
+
+	public UCMLaser(Move dir, Game game, Position pos) {
+		this.dir = dir;
+		this.game = game;
+		this.life = this.ARMOR;
+		this.pos = pos;
+	}
+
+	public boolean isAlive() {
+		return (!isOut());
+	}
+
+	public boolean isOnPosition(Position pos) {
+		return (this.pos.equals(pos));
+	}
+
+	public Position getPosition() {
+		return (this.pos);
+	}
+
+	public void receiveDamage(int damage) {
+		this.life -= damage;
+		if (this.life <= 0) {
+			this.die();
+		}
+	}
+
+	private String getSymbol() {
+		return (Messages.LASER_SYMBOL);
+	}
+
+	public String toString() {
+		return (getSymbol());
+	}
+
+	public int getDamage() {
+		return (this.DAMAGE);
+	}
 
 
 	/**
@@ -27,9 +70,10 @@ public class UCMLaser {
 	 *  Implements the automatic movement of the laser	
 	 */
 	public void automaticMove () {
-		performMovement(dir);
-		if(isOut())
-			die();
+		this.performMovement(dir);
+		if(this.isOut()) {
+			this.die();
+		}
 	}
 
 	
@@ -39,16 +83,15 @@ public class UCMLaser {
 	
 	
 	private void die() {
-		//TODO fill your code
+		this.onDelete();
 	}
 
-	private boolean isOut() {
-		//TODO fill your code
-		return false;
+	public boolean isOut() {
+		return (this.pos.isOut());
 	}
 
-	private void performMovement(Move dir) {
-		//TODO fill your code
+	public void performMovement(Move dir) {
+		this.pos = this.pos.move(dir);
 	}
 
 	/**
@@ -103,11 +146,9 @@ public class UCMLaser {
 	 * @param weapon the received bomb
 	 * @return always returns <code>true</code>
 	 */
-	/*
 	public boolean receiveAttack(Bomb weapon) {
 		receiveDamage(weapon.getDamage());
 		return true;
 	}
-	*/
 
 }

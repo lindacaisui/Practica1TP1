@@ -33,20 +33,29 @@ public class Position {
 	}
 	
 	public Position add(int i, int j) {
-		return new Position(col + i, row + j);	
+		return (new Position(col + i, row + j));	
 	}
 	
 	public Position move(Move mov) {
-		return new Position(col + mov.getX(), row + mov.getY()); 
+		return (new Position(col + mov.getX(), row + mov.getY()));
+	}
+	
+	public boolean isOut() {
+		if (this.get_col() < 0 || this.get_col() >= Game.DIM_X) {
+			return (true);
+		}
+		if (this.get_fil() < 0 || this.get_fil() >= Game.DIM_Y) {
+			return (true);
+		}
+		return (false);
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(obj == null) return false;
-		if(getClass() !=obj.getClass()) return false;
+		if(this == obj) return (true);
+		if(obj == null) return (false);
+		if(getClass() !=obj.getClass()) return (false);
 		
-		// obj es Position
 		Position other = (Position) obj;
 		return (col == other.col && row == other.row);
 	}
