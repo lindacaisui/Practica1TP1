@@ -45,13 +45,7 @@ public class UCMShip {
 	}
 	
 	public boolean isOut() {
-		if (this.pos.get_col() < 0 || this.pos.get_col() >= this.game.DIM_X) {
-			return (true);
-		}
-		if (this.pos.get_fil() < 0 || this.pos.get_fil() >= this.game.DIM_Y) {
-			return (true);
-		}
-		return (false);
+		return (this.pos.isOut());
 	}
 	
 	private String getSymbol() {
@@ -93,13 +87,11 @@ public class UCMShip {
 	}
 	
 	public boolean move(Move move) {
-		this.pos = new Position(pos.get_col() + move.getX(), pos.get_fil() + move.getY());
-		if (this.isOut()) {
+		if (this.pos.move(move).isOut()) {
 			System.out.print("No es un movimiento valido!\n");
-			this.pos = new Position(pos.get_col() - move.getX(), pos.get_fil() - move.getY());
-			
 			return (false);
 		}
+		this.pos = this.pos.move(move);
 		
 		return (true);
 	}

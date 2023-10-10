@@ -3,6 +3,7 @@ package tp1.logic;
 import java.util.Random;
 
 import tp1.logic.gameobjects.UCMShip;
+import tp1.logic.gameobjects.UCMLaser;
 
 // TODO implementarlo
 public class Game {
@@ -163,10 +164,9 @@ public class Game {
 		initGame();
 	}
 
-
-
 	public void enableLaser() {
-		//TODO fill your code		
+		this.laser = null;
+		player.enableLaser();	
 	}
 
 }
