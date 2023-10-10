@@ -6,17 +6,17 @@ import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class UCMShip {
-	private static int ARMOR = 3;
-	private static int DAMAGE = 1;
+	private final static int ARMOR = 3;
+	private final static int DAMAGE = 1;
 	private Position pos;
 	private int life;
 	private Game game;
 	private boolean canShoot;
 	
-	public UCMShip(Game game, Position pos, int life) {
+	public UCMShip(Game game, Position pos) {
 		this.game = game;
 		this.pos = pos;
-		this.life = life;
+		this.life = this.ARMOR;
 		this.canShoot = true;
 	}
 	
