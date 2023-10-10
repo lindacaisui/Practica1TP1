@@ -3,6 +3,7 @@ package tp1.logic.gameobjects;
 import tp1.logic.Game;
 import tp1.logic.Move;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 public class UCMShip {
 	private static int ARMOR = 3;
@@ -23,12 +24,20 @@ public class UCMShip {
 		return (this.life > 0);
 	}
 	
+	public int getLife() {
+		return (this.life);
+	}
+	
 	public void die() {
 		this.life = 0;
 	}
 	
 	public boolean isOnPosition(Position position) {
 		return (this.pos.equals(position));
+	}
+	
+	public Position getPosition() {
+		return (this.pos);
 	}
 	
 	public void receiveDamage(int damage) {
@@ -45,20 +54,8 @@ public class UCMShip {
 		return (false);
 	}
 	
-	public boolean performMovement(Move move) {
-		this.pos = new Position(pos.get_col() + move.getX(), pos.get_fil() + move.getY());
-		if (this.isOut()) {
-			System.out.print("No es un movimiento valido!\n");
-			this.pos = new Position(pos.get_col() - move.getX(), pos.get_fil() - move.getY());
-			
-			return (false);
-		}
-		
-		return (true);
-	}
-	
 	private String getSymbol() {
-		return ("^__^");
+		return (Messages.UCMSHIP_SYMBOL);
 	}
 	
 	public String toString() {
@@ -76,18 +73,52 @@ public class UCMShip {
 	}
 	
 	protected String getDescription() {
-		return ("[U]CM Ship");
+		return (Messages.UCMSHIP_DESCRIPTION);
 	}
 	
 	protected int getDamage() {
 		return (this.DAMAGE);
 	}
 	
-	public int getLife() {
-		return (this.life);
+	public void onDelete() {
+		
 	}
 	
-	public Position getPosition() {
-		return (this.pos);
+	public void automaticMove() {
+		
 	}
+	
+	public void computerAction() {
+		
+	}
+	
+	public boolean move(Move move) {
+		this.pos = new Position(pos.get_col() + move.getX(), pos.get_fil() + move.getY());
+		if (this.isOut()) {
+			System.out.print("No es un movimiento valido!\n");
+			this.pos = new Position(pos.get_col() - move.getX(), pos.get_fil() - move.getY());
+			
+			return (false);
+		}
+		
+		return (true);
+	}
+	
+	public void enableLaser() {
+		this.canShoot = true;
+	}
+	
+	public boolean shootLaser() {
+		if (this.canShoot == false) {
+			return (false);
+		}
+		return (true);
+	}
+	
+	public void receiveAttack() {
+		
+	}
+
+	
+
 }
