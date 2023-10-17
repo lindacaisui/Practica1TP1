@@ -48,7 +48,43 @@ public class AlienManager {
 
 	
 	// CONTROL METHODS
+	
+	public int getRemainingAliens() {
 		
+		return this.remainingAliens;
+	}
+	
+	public void allAlienDead() {
+		
+	}
+	
+	public void alienDead() {
+		
+	}
+	
+	public void haveLanded() {
+		
+	}
+	
+	public boolean finalRowReached() {
+		
+		return this.squadInFinalRow;
+	}
+	
+	public void readyToDescend() {
+		
+	}
+	
+	public int shipOnBorder() {
+		
+		return this.shipsOnBorder;
+	}
+	
+	public boolean onBorder() {
+		
+		return this.onBorder;
+	}
+	
 	public void shipOnBorder() {
 		if(!onBorder) {
 			onBorder = true;
