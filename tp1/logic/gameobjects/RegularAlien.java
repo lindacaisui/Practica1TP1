@@ -42,7 +42,7 @@ public class RegularAlien {
 	}
 	
 	public void die() {
-
+		this.onDelete();
 	}
 	
 	public boolean isOnPosition(Position pos) {
@@ -108,7 +108,7 @@ public class RegularAlien {
 	}
 	
 	public void onDelete() {
-		
+		this.alienManager.alienDead();
 	}
 	
 	public void automaticMove() {
