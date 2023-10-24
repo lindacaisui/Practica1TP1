@@ -30,7 +30,16 @@ public class UCMLaser {
 	public boolean isAlive() {
 		return (!isOut());
 	}
-
+	
+	public int getLife() {
+		
+		return this.life;
+	}
+	
+	private void die() {
+		this.onDelete();
+	}
+	
 	public boolean isOnPosition(Position pos) {
 		return (this.pos.equals(pos));
 	}
@@ -44,6 +53,14 @@ public class UCMLaser {
 		if (this.life <= 0) {
 			this.die();
 		}
+	}
+	
+	public boolean isOut() {
+		return (this.pos.isOut());
+	}
+	
+	public void performMovement(Move dir) {
+		this.pos = this.pos.move(dir);
 	}
 
 	private String getSymbol() {
@@ -78,21 +95,6 @@ public class UCMLaser {
 
 	
 	// PERFORM ATTACK METHODS
-	
-	
-	
-	
-	private void die() {
-		this.onDelete();
-	}
-
-	public boolean isOut() {
-		return (this.pos.isOut());
-	}
-
-	public void performMovement(Move dir) {
-		this.pos = this.pos.move(dir);
-	}
 
 	/**
 	 * Method that implements the attack by the laser to a regular alien.

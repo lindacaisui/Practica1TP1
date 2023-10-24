@@ -138,11 +138,7 @@ public class RegularAlien {
 		return (this.receiveDamage(laser.getDamage()));
 	}
 
-	
-
-	
-
-	
-	
-
+	public int getcyclesToMove() {
+		return this.cyclesToMove;
+	}
 }

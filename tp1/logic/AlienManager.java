@@ -20,6 +20,7 @@ public class AlienManager {
 	private boolean squadInFinalRow;
 	private int shipsOnBorder;
 	private boolean onBorder;
+	
 
 	public AlienManager(Game game, Level level) {
 		this.level = level;
@@ -54,7 +55,11 @@ public class AlienManager {
 		return this.remainingAliens;
 	}
 	
-	public void allAlienDead() {
+	public boolean allAlienDead() {
+		if (remainingAliens == 0)
+			return true;
+		else 
+			return false;
 		
 	}
 	
@@ -76,25 +81,18 @@ public class AlienManager {
 	}
 	
 	public int shipOnBorder() {
-		
+		if(!onBorder) {
+			onBorder = true;
+			shipsOnBorder = remainingAliens;
+		}
 		return this.shipsOnBorder;
 	}
+	
 	
 	public boolean onBorder() {
 		
 		return this.onBorder;
 	}
 	
-	public void shipOnBorder() {
-		if(!onBorder) {
-			onBorder = true;
-			shipsOnBorder = remainingAliens;
-		}
-	}
-
-	public boolean onBorder() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
