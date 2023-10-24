@@ -26,6 +26,10 @@ public class AlienManager {
 		this.level = level;
 		this.game = game;
 		this.remainingAliens = 0;
+		
+		this.squadInFinalRow = false;
+		this.shipsOnBorder = 0;
+		this.onBorder = false;
 	}
 		
 	// INITIALIZER METHODS
@@ -35,8 +39,43 @@ public class AlienManager {
 	 * @return the initial list of regular aliens according to the current level
 	 */
 	protected RegularAlienList initializeRegularAliens() {
-		//TODO fill your code
-		return null;
+		RegularAlienList list = new RegularAlienList(Game.DIM_X * Game.DIM_Y);
+		Position start_pos = new Position(3, 1);
+		
+		if (this.level == Level.EASY) {
+			for (int i = 0; i < 4; i++) {
+				list.add(new RegularAlien(new Position(start_pos), this.game, this, 3));
+				start_pos = start_pos.move(Move.RIGHT);
+			}
+			
+			
+		}
+		
+		if (this.level == Level.HARD) {
+			for (int i = 0; i < 4; i++) {
+				list.add(new RegularAlien(new Position(start_pos), this.game, this, 2));
+				start_pos = start_pos.move(Move.RIGHT);
+			}
+			start_pos = start_pos.move(Move.DOWN);
+			for (int i = 0; i < 4; i++) {
+				start_pos = start_pos.move(Move.LEFT);
+				list.add(new RegularAlien(new Position(start_pos), this.game, this, 2));
+			}
+		}
+		
+		if (this.level == Level.INSANE) {
+			for (int i = 0; i < 4; i++) {
+				list.add(new RegularAlien(new Position(start_pos), this.game, this, 1));
+				start_pos = start_pos.move(Move.RIGHT);
+			}
+			start_pos = start_pos.move(Move.DOWN);
+			for (int i = 0; i < 4; i++) {
+				start_pos = start_pos.move(Move.LEFT);
+				list.add(new RegularAlien(new Position(start_pos), this.game, this, 1));
+			}
+		}
+		
+		return list;
 	}
 
 	/**

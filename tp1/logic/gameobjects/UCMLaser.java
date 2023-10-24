@@ -148,9 +148,11 @@ public class UCMLaser {
 	 * @param weapon the received bomb
 	 * @return always returns <code>true</code>
 	 */
+	/*
 	public boolean receiveAttack(Bomb weapon) {
 		receiveDamage(weapon.getDamage());
 		return true;
 	}
+	*/
 
 }

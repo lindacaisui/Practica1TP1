@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import tp1.logic.gameobjects.UCMShip;
+import tp1.logic.lists.RegularAlienList;
 import tp1.logic.gameobjects.UCMLaser;
 
 // TODO implementarlo
@@ -24,6 +25,10 @@ public class Game {
 	//TODO fill your code
 
 	private void initGame() {
+		this.currentCycle = 0;
+		this.alienManager = new AlienManager(this, this.level);
+		this.regularAliens = this.alienManager.initializeRegularAliens();
+		this.player = new UCMShip(this, new Position(Game.DIM_X / 2, Game.DIM_Y - 1));
 		
 	}
 	
@@ -60,7 +65,10 @@ public class Game {
 		Position pos = new Position(col, row);
 		
 		if(pos.equals(player.getPosition())) {
-		return player.toString();
+			return player.toString();
+		}
+		if (this.regularAliens.getObjectInPosition(pos) != null) {
+			return (this.regularAliens.getObjectInPosition(pos).toString());
 		}
 		return "";
 	}
