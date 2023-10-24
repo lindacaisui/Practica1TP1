@@ -1,5 +1,7 @@
 package tp1.logic;
 
+import tp1.logic.gameobjects.RegularAlien;
+
 public class RegularAlienList {
 	
 	private RegularAlien[] objects;
@@ -22,11 +24,12 @@ public class RegularAlienList {
 		
 	}
 	
-	public void toString() {
+	public String toString() {
+		return "hola";
 		
 	}
 	
-	public void ComputerActions() {
+	public void computerActions() {
 		
 	}
 	

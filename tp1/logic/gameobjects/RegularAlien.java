@@ -47,6 +47,8 @@ public class RegularAlien {
 		//TODO fill your code
 		return false;
 	}
-	
+	public int getcyclesToMove() {
+		return this.cyclesToMove;
+	}
 
 }

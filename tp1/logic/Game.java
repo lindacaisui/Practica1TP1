@@ -1,6 +1,7 @@
 package tp1.logic;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import tp1.logic.gameobjects.UCMShip;
 import tp1.logic.gameobjects.UCMLaser;
@@ -23,7 +24,6 @@ public class Game {
 	//TODO fill your code
 
 	private void initGame() {
-		player = new UCMShip(this,new Position(DIM_X / 2, DIM_Y - 1));
 		
 	}
 	
@@ -42,6 +42,7 @@ public class Game {
 		currentCycle=0;
 		// TODO implementar el resto
 	}
+		
 	
 	
 	public int getCycle() {
@@ -65,8 +66,14 @@ public class Game {
 	}
 
 	
-	public void isFinished() {
-		
+	public boolean isFinished() {
+		if (this.getRemainingAliens()==0) {
+			return true;
+		}
+		if (this.player.isAlive() == false) {
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean aliensWin() {
@@ -81,15 +88,20 @@ public class Game {
 
 	
 	public void update() {
+		removeDead();
+		computerActions();
+		laserAutomaticMove();
+		automaticMoves();
 		
 	}
 	
 	private void removeDead() {
+		this.regularAliens.removeDead();
 		
 	}
 	
 	private void computerActions() {
-		
+		this.regularAliens.computerActions();
 	}
 	
 	private void laserAutomaticMove() {
@@ -97,6 +109,7 @@ public class Game {
 	}
 	
 	private void automaticMoves() {
+		this.regularAliens.automaticMoves();
 		
 	}
 	
@@ -104,46 +117,84 @@ public class Game {
 		
 	}
 	
-	public void infoToString() {
+	public String infoToString() {
+		StringBuilder string_builder = new StringBuilder();
+		
+		string_builder.append("Number of cycles: ");
+		string_builder.append(currentCycle);
+		string_builder.append("\n");
+		
+		string_builder.append("Life: ");
+		string_builder.append(this.player.getLife());
+		string_builder.append("\n");
+		
+		string_builder.append("Points: ");
+		string_builder.append(0);
+		string_builder.append("\n");
+	
+		string_builder.append("ShockWave");
+		string_builder.append("OFF");
+		string_builder.append("\n");
+		
+		string_builder.append("Remaining aliens: ");
+		string_builder.append(this.alienManager.getRemainingAliens());
+		
+		return string_builder.toString();
+	}
+	
+	public String listOfShips() {
+		return this.regularAliens.toString();
+	}
+	
+	public boolean move(Move move) {
+		return this.player.move(move);
 		
 	}
 	
-	public void listOfShips() {
-		
-	}
-	
-	public void move() {
-		
-	}
-	
-	public void shootLaser() {
-		
+	public boolean shootLaser() {
+		return this.player.shootLaser();
 	}
 	
 	public void shockWave() {
-		
 	}
 	
 	public void receivePoints() {
 		
 	}
 	
-	public void getNumCyclesToMoveOneCell() {
+	public int getNumCyclesToMoveOneCell() { 
+		
+		int velocidad=1;
+		
+		if (this.level==Level.EASY) {
+			velocidad=3;
+		}
+		
+		else if (this.level==Level.HARD) {
+			velocidad=2;
+		}
+		
+		else if (this.level==Level.INSANE) {
+			velocidad=1;
+		}
+		
+		return (velocidad - (this.currentCycle % velocidad));
 		
 	}
 	
 	private void haveLanded() {
-		
+		this.alienManager.haveLanded();
 	}
 	
 	public int getRemainingAliens() {
 		//TODO fill your code
-		return 0;
+		return this.alienManager.getRemainingAliens();
 	}
 
 	
-	public void performAttack() {
+	public boolean performAttack() {
 		
+		return this.player.shootLaser();
 	}
 	
 	public void checkAttacksTo() {
