@@ -48,6 +48,7 @@ public class Controller {
 		while(true) {
 			String[] args = prompt();
 			
+			if (args.length > 0) {
 			switch(args[0]) {
 			case "m":
 			case "move":
@@ -56,11 +57,49 @@ public class Controller {
 					game.update();
 				}
 				break;
+			case "shoot":
+				if (game.shootLaser()) {
+					game.update();
+				}
+				break;
+			case "shockwave":
+				game.shockWave();
+				game.update();
+				break;
+			case "list":
+				listShips();
+				break;
+			case "reset":
+				resetGame();
+				break;
+			case "exit":
+				printEndMessage();
+				return;
+			case "help":
+				printHelp();
+				break;
+			case "none":
+				break;
 			default:
+				System.out.println("Comando no válido");
 				break;
 			}
+			this.printGame();
+		}
 		}
 		
+	}
+	
+	private void listShips() {
+		}
+	
+	private void resetGame() {
+		game.reset();
+		this.printGame();
+	}
+	
+	private void printHelp() {
+		System.out.println(printer.endMessage());
 	}
 
 	/**
