@@ -53,45 +53,64 @@ public class Controller {
 			case "m":
 			case "move":
 				Move move = Move.valueOf(args[1].toUpperCase());
-				if(game.move(move)) {
-					game.update();
+				if(this.game.move(move)) {
+					this.game.update();
+					this.printGame();
 				}
 				break;
+			case "s":
 			case "shoot":
-				if (game.shootLaser()) {
-					game.update();
+				if (this.game.shootLaser()) {
+					this.game.update();
+					this.printGame();
 				}
 				break;
+			case "w":
 			case "shockwave":
-				game.shockWave();
-				game.update();
+				this.game.shockWave();
+				this.game.update();
+				this.printGame();
 				break;
+			case "l":
 			case "list":
-				listShips();
+				this.listShips();
 				break;
+			case "r":
 			case "reset":
-				resetGame();
+				this.resetGame();
+				this.printGame();
 				break;
+			case "e":
 			case "exit":
-				printEndMessage();
+				this.printEndMessage();
 				return;
+			case "h":
 			case "help":
-				printHelp();
+				this.printHelp();
 				break;
+			case "":
+			case "n":
 			case "none":
+				this.game.update();
+				this.printGame();
 				break;
 			default:
 				System.out.println("Comando no válido");
 				break;
 			}
-			this.printGame();
+			
 		}
+			if (this.game.isFinished()) {
+				this.printEndMessage();
+				return;
+			}
 		}
 		
 	}
 	
 	private void listShips() {
-		}
+		System.out.println(this.game.listOfShips());
+	}
 	
 	private void resetGame() {
 		game.reset();
@@ -99,7 +118,7 @@ public class Controller {
 	}
 	
 	private void printHelp() {
-		System.out.println(printer.endMessage());
+		System.out.println(Messages.HELP);
 	}
 
 	/**

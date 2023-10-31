@@ -2,19 +2,14 @@ package tp1.logic.gameobjects;
 
 import tp1.logic.AlienManager;
 import tp1.logic.Game;
+import tp1.logic.Level;
 import tp1.logic.Move;
 import tp1.logic.Position;
+import tp1.logic.lists.BombList;
 import tp1.view.Messages;
 
-/**
- * 
- * Class representing a regular alien
- *
- */
-public class RegularAlien {
-
-	// TODO fill your code
-	private static int ARMOR = 2;
+public class DestroyerAlien {
+	private static int ARMOR = 1;
 	private Position pos;
 	private int life;
 	private Game game;
@@ -23,16 +18,22 @@ public class RegularAlien {
 	private int speed;
 	private int points;
 	private AlienManager alienManager;
+	private boolean canShoot;
+	private BombList bombList;
+	private double shotFreq;
 
-	public RegularAlien(Position pos, Game game, AlienManager manager, int speed) {
+	public DestroyerAlien(Position pos, Game game, AlienManager manager, int speed, BombList bombList) {
 		this.pos = pos;
 		this.game = game;
 		this.alienManager = manager;
 		this.life = this.ARMOR;
 		this.dir = Move.LEFT;
 		this.speed = speed;
-		this.points = 5;
+		this.points = 10;
 		this.cyclesToMove = speed;
+		this.canShoot = true;
+		this.bombList = bombList;
+		this.shotFreq = this.game.getLevel().getShootFrequency();
 	}
 
 	public boolean isAlive() {
@@ -73,7 +74,7 @@ public class RegularAlien {
 	}
 
 	private String getSymbol() {
-		return (Messages.REGULAR_ALIEN_SYMBOL);
+		return (Messages.DESTROYER_ALIEN_SYMBOL);
 	}
 
 	public String toString() {
@@ -88,20 +89,23 @@ public class RegularAlien {
 	}
 
 	public String getInfo() {
-		StringBuilder info = new StringBuilder();
-
-		info.append(this.getDescription());
-
-		return (info.toString());
+		return (this.getDescription());
 	}
 
 	private String getDescription() {
-		return (Messages.REGULAR_ALIEN_DESCRIPTION);
+		return (Messages.DESTROYER_ALIEN_DESCRIPTION);
 	}
 
 	public void onDelete() {
 		this.alienManager.alienDead();
 		this.game.addPoints(this.points);
+	}
+
+	public void computerActions() {
+		double rand = this.game.getRandom().nextDouble();
+		if (rand < this.shotFreq) {
+			this.shootBomb();
+		}
 	}
 
 	public void automaticMove() {
@@ -111,10 +115,12 @@ public class RegularAlien {
 		}
 		if (this.alienManager.onBorder()) {
 			this.descent();
-			if (this.dir == Move.LEFT) { this.dir = Move.RIGHT; }
-			else { this.dir = Move.LEFT; }
-		}
-		else {
+			if (this.dir == Move.LEFT) {
+				this.dir = Move.RIGHT;
+			} else {
+				this.dir = Move.LEFT;
+			}
+		} else {
 			this.performMovement(dir);
 		}
 		this.cyclesToMove = this.speed - 1;
@@ -140,6 +146,20 @@ public class RegularAlien {
 
 	public boolean receiveAttack(UCMLaser laser) {
 		return (this.receiveDamage(laser.getDamage()));
+	}
+
+	public void enableBomb() {
+		this.canShoot = true;
+	}
+
+	public boolean shootBomb() {
+		if (this.canShoot == false) {
+			return (false);
+		}
+		System.out.println("Shooting bomb");
+		this.bombList.add(new Bomb(Move.DOWN, this.pos, this));
+		this.canShoot = false;
+		return (true);
 	}
 
 	public int getcyclesToMove() {

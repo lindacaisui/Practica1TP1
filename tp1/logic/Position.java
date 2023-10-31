@@ -41,10 +41,10 @@ public class Position {
 	}
 	
 	public boolean isOut() {
-		if (this.get_col() < 0 || this.get_col() >= Game.DIM_X) {
+		if (this.col < 0 || this.col >= Game.DIM_X) {
 			return (true);
 		}
-		if (this.get_fil() < 0 || this.get_fil() >= Game.DIM_Y) {
+		if (this.row < 0 || this.row >= Game.DIM_Y) {
 			return (true);
 		}
 		return (false);
@@ -54,7 +54,7 @@ public class Position {
 	public boolean equals(Object obj) {
 		if(this == obj) return (true);
 		if(obj == null) return (false);
-		if(getClass() !=obj.getClass()) return (false);
+		if(getClass() != obj.getClass()) return (false);
 		
 		Position other = (Position) obj;
 		return (col == other.col && row == other.row);

@@ -1,28 +1,27 @@
 package tp1.logic.lists;
 
 import tp1.logic.Position;
-import tp1.logic.gameobjects.RegularAlien;
+import tp1.logic.gameobjects.Bomb;
 import tp1.logic.gameobjects.UCMLaser;
 
-public class RegularAlienList {
-	
-	private RegularAlien[] objects;
+public class BombList {
+	private Bomb[] objects;
 	private int num;
 	
-	public RegularAlienList(int size) {
-		this.objects = new RegularAlien[size];
+	public BombList(int size) {
+		this.objects = new Bomb[size];
 		this.num = 0;
 	}
 	
-	public void add(RegularAlien alien) {
-		this.objects[this.num] = alien;
+	public void add(Bomb bomb) {
+		this.objects[this.num] = bomb;
 		this.num++;
 	}
 	
-	private void remove(RegularAlien alien) {
+	private void remove(Bomb bomb) {
 		int i = 0;
 		while (i < this.num) {
-			if (this.objects[i] == alien) {
+			if (this.objects[i] == bomb) {
 				this.objects[i] = null;
 				while (i < this.num - 1) {
 					this.objects[i] = this.objects[i + 1];
@@ -39,7 +38,7 @@ public class RegularAlienList {
 		return (this.num);
 	}
 	
-	public RegularAlien getObjectInPosition(Position pos) {
+	public Bomb getObjectInPosition(Position pos) {
 		for (int i = 0; i < this.num; i++) {
 			if (pos.equals(this.objects[i].getPosition())) {
 				return (this.objects[i]);
@@ -48,13 +47,8 @@ public class RegularAlienList {
 		return null;
 	}
 	
-	public void computerActions(UCMLaser laser) {
-		this.checkAttacks(laser);
-		this.removeDead();
-		
-		for (int i = 0; i < this.num; i++) {
-			this.objects[i].readyToDescend();
-		}
+	public String toString() {
+		return "hola";
 	}
 	
 	public void automaticMoves() {
@@ -66,18 +60,9 @@ public class RegularAlienList {
 	public void removeDead() {
 		for (int i = 0; i < this.num; i++) {
 			if (!objects[i].isAlive()) {
-				objects[i].die();
 				this.remove(objects[i]);
 			}
 		}
-	}
-	
-	
-	public void shockWave() {
-		for (int i = 0; i < this.num; i++) {
-			this.objects[i].receiveDamage(1);
-		}
-		this.removeDead();
 	}
 	
 	public void checkAttacks(UCMLaser laser) {
@@ -85,8 +70,8 @@ public class RegularAlienList {
 		Position laser_pos = laser.getPosition();
 		for (int i = 0; i < this.num; i++) {
 			if (objects[i].getPosition().equals(laser_pos)) {
-				laser.performAttack(objects[i]);
-				laser.receiveDamage(1);
+				laser.receiveAttack(objects[i]);
+				objects[i].receiveDamage(1);
 				break;
 			}
 		}
