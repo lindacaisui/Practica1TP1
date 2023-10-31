@@ -107,7 +107,7 @@ public class Messages {
 
 	public static final String UCMSHIP_SYMBOL = "^__^";
 
-	public static final String UCMSHIP_DEAD_SYMBOL = "^xx^";
+	public static final String UCMSHIP_DEAD_SYMBOL = "#--#";
 
 	public static final String UCMSHIP_DESCRIPTION = "[U]CM Ship";
 

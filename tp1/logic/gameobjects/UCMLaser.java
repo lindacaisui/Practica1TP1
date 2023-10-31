@@ -12,7 +12,6 @@ import tp1.view.Messages;
  */
 public class UCMLaser {
 	
-	//TODO fill your code
 	private final static int DAMAGE = 1;
 	private final static int ARMOR = 1;
 	private Position pos;
@@ -68,7 +67,7 @@ public class UCMLaser {
 	}
 
 	public String toString() {
-		return (getSymbol());
+		return (this.getSymbol());
 	}
 
 	public int getDamage() {
@@ -104,8 +103,10 @@ public class UCMLaser {
 	 * @return <code>true</code> if the alien has been attacked by the laser.
 	 */
 	public boolean performAttack(RegularAlien other) {
-		//TODO fill your code
-		return false;
+		if (other.isAlive() && this.pos.equals(other.getPosition())) {
+			return (this.weaponAttack(other));
+		}
+		return (false);
 	}
 
 	/**
@@ -116,15 +117,27 @@ public class UCMLaser {
 	 * @return <code>true</code> if the alien has been attacked by the laser.
 	 */
 
-	/*
 	public boolean performAttack(DestroyerAlien other) {
-		//TODO fill your code
-		return false;
+		if (other.isAlive() && this.pos.equals(other.getPosition())) {
+			return (this.weaponAttack(other));
+		}
+		return (false);
 	}
-	*/
 	
-	//TODO fill your code
+	/**
+	 * Method that implements the attack by the laser to a ufo.
+	 * It checks whether both objects are alive and in the same position.
+	 * If so call the "actual" attack method {@link weaponAttack}.
+	 * @param other the ufo possibly under attack
+	 * @return <code>true</code> if the alien has been attacked by the laser.
+	 */
 
+	public boolean performAttack(Ufo other) {
+		if (other.isAlive() && this.pos.equals(other.getPosition())) {
+			return (this.weaponAttack(other));
+		}
+		return (false);
+	}
 
 	//ACTUAL ATTACK METHODS
 	
@@ -135,12 +148,16 @@ public class UCMLaser {
 	 * @return always returns <code>true</code>
 	 */
 	private boolean weaponAttack(RegularAlien other) {
-		return other.receiveAttack(this);	
+		return (other.receiveAttack(this));
 	}
-
-	//TODO fill your code
-
-
+	
+	private boolean weaponAttack(DestroyerAlien other) {
+		return (other.receiveAttack(this));
+	}
+	
+	private boolean weaponAttack(Ufo other) {
+		return (other.receiveAttack(this));
+	}
 	// RECEIVE ATTACK METHODS
 	
 	/**
@@ -148,11 +165,9 @@ public class UCMLaser {
 	 * @param weapon the received bomb
 	 * @return always returns <code>true</code>
 	 */
-	/*
 	public boolean receiveAttack(Bomb weapon) {
 		receiveDamage(weapon.getDamage());
-		return true;
+		return (true);
 	}
-	*/
 
 }

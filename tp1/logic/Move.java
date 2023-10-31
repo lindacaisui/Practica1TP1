@@ -11,20 +11,15 @@ public enum Move {
 	private int y;
 	
 	private Move(int x, int y) {
-		this.x=x;
-		this.y=y;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public int getX() {
-		return x;
+		return (this.x);
 	}
 
 	public int getY() {
-		return y;
+		return (this.y);
 	}
-
-
-	//TODO fill your code
-	
-	
 }

@@ -10,6 +10,7 @@ public class UCMShip {
 	private final static int DAMAGE = 1;
 	private Position pos;
 	private int life;
+	private int points;
 	private Game game;
 	private boolean canShoot;
 	
@@ -17,6 +18,7 @@ public class UCMShip {
 		this.game = game;
 		this.pos = pos;
 		this.life = this.ARMOR;
+		this.points = 0;
 		this.canShoot = true;
 	}
 	
@@ -26,6 +28,14 @@ public class UCMShip {
 	
 	public int getLife() {
 		return (this.life);
+	}
+	
+	public int getPoints() {
+		return (this.points);
+	}
+	
+	public void addPoints(int points) {
+		this.points += points;
 	}
 	
 	public void die() {
@@ -49,7 +59,8 @@ public class UCMShip {
 	}
 	
 	private String getSymbol() {
-		return (Messages.UCMSHIP_SYMBOL);
+		if (this.isAlive()) { return (Messages.UCMSHIP_SYMBOL); }
+		else { return (Messages.UCMSHIP_DEAD_SYMBOL); }
 	}
 	
 	public String toString() {
@@ -70,20 +81,12 @@ public class UCMShip {
 		return (Messages.UCMSHIP_DESCRIPTION);
 	}
 	
-	protected int getDamage() {
+	public int getDamage() {
 		return (this.DAMAGE);
 	}
 	
 	public void onDelete() {
-		
-	}
-	
-	public void automaticMove() {
-		
-	}
-	
-	public void computerAction() {
-		
+		this.pos = null;
 	}
 	
 	public boolean move(Move move) {
@@ -104,11 +107,13 @@ public class UCMShip {
 		if (this.canShoot == false) {
 			return (false);
 		}
+		this.game.addObject(new UCMLaser(Move.UP, this.game, this.pos));
+		this.canShoot = false;
 		return (true);
 	}
 	
-	public void receiveAttack() {
-		
+	public void receiveAttack(Bomb bomb) {
+		this.receiveDamage(bomb.getDamage());
 	}
 
 	

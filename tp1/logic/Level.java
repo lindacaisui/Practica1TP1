@@ -26,16 +26,35 @@ public enum Level {
 		this.numCyclesToMoveOneCell = numCyclesToMoveOneCell;
 		this.ufoFrequency = ufoFrequency;
 	}
-
 	
-	//TODO fill your code
+	public int getNumRegularAliens() {
+		return (this.numRegularAliens);
+	}
+	
+	public int getNumRowsRegularAliens() {
+		return (this.numRowsRegularAliens);
+	}
+	
+	public int getNumDestroyerAliens() {
+		return (this.numDestroyerAliens);
+	}
+	
+	public int getNumCyclesToMoveOneCell() {
+		return (this.numCyclesToMoveOneCell);
+	}
+	
+	
 
 	/**
 	 * Returns UFO frequency corresponding the Level
 	 * @return UFO Frequency
 	 */
 	public double getUfoFrequency() {
-		return ufoFrequency;
+		return (this.ufoFrequency);
+	}
+	
+	public double getShootFrequency() {
+		return (this.shootFrequency);
 	}
 	
 

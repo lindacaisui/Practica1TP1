@@ -1,25 +1,24 @@
 package tp1.logic.lists;
 
 import tp1.logic.Position;
-import tp1.logic.gameobjects.RegularAlien;
+import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.UCMLaser;
 
-public class RegularAlienList {
-	
-	private RegularAlien[] objects;
+public class DestroyerAlienList {
+	private DestroyerAlien[] objects;
 	private int num;
 	
-	public RegularAlienList(int size) {
-		this.objects = new RegularAlien[size];
+	public DestroyerAlienList(int size) {
+		this.objects = new DestroyerAlien[size];
 		this.num = 0;
 	}
 	
-	public void add(RegularAlien alien) {
+	public void add(DestroyerAlien alien) {
 		this.objects[this.num] = alien;
 		this.num++;
 	}
 	
-	private void remove(RegularAlien alien) {
+	private void remove(DestroyerAlien alien) {
 		int i = 0;
 		while (i < this.num) {
 			if (this.objects[i] == alien) {
@@ -39,7 +38,7 @@ public class RegularAlienList {
 		return (this.num);
 	}
 	
-	public RegularAlien getObjectInPosition(Position pos) {
+	public DestroyerAlien getObjectInPosition(Position pos) {
 		for (int i = 0; i < this.num; i++) {
 			if (pos.equals(this.objects[i].getPosition())) {
 				return (this.objects[i]);
@@ -54,6 +53,7 @@ public class RegularAlienList {
 		
 		for (int i = 0; i < this.num; i++) {
 			this.objects[i].readyToDescend();
+			this.objects[i].computerActions();
 		}
 	}
 	
@@ -71,7 +71,6 @@ public class RegularAlienList {
 			}
 		}
 	}
-	
 	
 	public void shockWave() {
 		for (int i = 0; i < this.num; i++) {

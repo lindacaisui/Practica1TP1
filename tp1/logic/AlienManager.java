@@ -1,7 +1,10 @@
 package tp1.logic;
 
+import tp1.logic.gameobjects.DestroyerAlien;
 //import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.RegularAlien;
+import tp1.logic.lists.BombList;
+import tp1.logic.lists.DestroyerAlienList;
 //import tp1.logic.lists.DestroyerAlienList;
 import tp1.logic.lists.RegularAlienList;
 
@@ -39,39 +42,15 @@ public class AlienManager {
 	 * @return the initial list of regular aliens according to the current level
 	 */
 	protected RegularAlienList initializeRegularAliens() {
-		RegularAlienList list = new RegularAlienList(Game.DIM_X * Game.DIM_Y);
-		Position start_pos = new Position(3, 1);
+		RegularAlienList list = new RegularAlienList(this.level.getNumRegularAliens());
+		int x = 2;
+		int y = 1;
 		
-		if (this.level == Level.EASY) {
-			for (int i = 0; i < 4; i++) {
-				list.add(new RegularAlien(new Position(start_pos), this.game, this, 3));
-				start_pos = start_pos.move(Move.RIGHT);
-			}
-			
-			
-		}
+		this.remainingAliens += this.level.getNumRegularAliens();
 		
-		if (this.level == Level.HARD) {
-			for (int i = 0; i < 4; i++) {
-				list.add(new RegularAlien(new Position(start_pos), this.game, this, 2));
-				start_pos = start_pos.move(Move.RIGHT);
-			}
-			start_pos = start_pos.move(Move.DOWN);
-			for (int i = 0; i < 4; i++) {
-				start_pos = start_pos.move(Move.LEFT);
-				list.add(new RegularAlien(new Position(start_pos), this.game, this, 2));
-			}
-		}
-		
-		if (this.level == Level.INSANE) {
-			for (int i = 0; i < 4; i++) {
-				list.add(new RegularAlien(new Position(start_pos), this.game, this, 1));
-				start_pos = start_pos.move(Move.RIGHT);
-			}
-			start_pos = start_pos.move(Move.DOWN);
-			for (int i = 0; i < 4; i++) {
-				start_pos = start_pos.move(Move.LEFT);
-				list.add(new RegularAlien(new Position(start_pos), this.game, this, 1));
+		for (int i = 0; i < this.level.getNumRowsRegularAliens(); i++) {
+			for (int j = 0; j < this.level.getNumRegularAliens() / this.level.getNumRowsRegularAliens(); j++) {
+				list.add(new RegularAlien(new Position(x + j, y + i), this.game, this, this.level.getNumCyclesToMoveOneCell()));
 			}
 		}
 		
@@ -82,54 +61,68 @@ public class AlienManager {
 	 * Initializes the list of destroyer aliens
 	 * @return the initial list of destroyer aliens according to the current level
 	 */
-//	protected  DestroyerAlienList initializeDestroyerAliens() {
-//		//TODO fill your code
-//	}
-
-	
+	protected  DestroyerAlienList initializeDestroyerAliens(BombList bombList) {
+		DestroyerAlienList list = new DestroyerAlienList(this.level.getNumDestroyerAliens());
+		int x = 3 - this.level.getNumDestroyerAliens() / 4;
+		int y = 2 + this.level.getNumRowsRegularAliens() / 2;
+		
+		this.remainingAliens += this.level.getNumDestroyerAliens();
+		
+		for (int i = 0; i < this.level.getNumDestroyerAliens(); i++) {
+			list.add(new DestroyerAlien(new Position(x + i, y), this.game, this, this.level.getNumCyclesToMoveOneCell(), bombList));
+		}
+		
+		return list;
+	}
 	// CONTROL METHODS
 	
 	public int getRemainingAliens() {
-		
 		return this.remainingAliens;
 	}
 	
 	public boolean allAlienDead() {
-		if (remainingAliens == 0)
-			return true;
-		else 
-			return false;
+		return (this.remainingAliens == 0);
 		
 	}
 	
 	public void alienDead() {
-		
+		this.remainingAliens--;
+		this.shipNotOnBorder();
 	}
 	
-	public void haveLanded() {
-		
+	public boolean haveLanded() {
+		return (this.squadInFinalRow);
 	}
 	
-	public boolean finalRowReached() {
-		
-		return this.squadInFinalRow;
+	public void finalRowReached() {
+		this.squadInFinalRow = true;
 	}
 	
 	public void readyToDescend() {
-		
+		this.onBorder = true;
 	}
 	
-	public int shipOnBorder() {
-		if(!onBorder) {
-			onBorder = true;
-			shipsOnBorder = remainingAliens;
+	public void shipOnBorder() {
+		if (!this.onBorder) {
+			this.onBorder = true;
+			this.shipsOnBorder = this.remainingAliens;
 		}
-		return this.shipsOnBorder;
 	}
 	
+	public void shipNotOnBorder() {
+		this.shipsOnBorder--;
+		if (this.shipsOnBorder < 0) {
+			this.shipsOnBorder = 0;
+		}
+	}
 	
 	public boolean onBorder() {
-		
+		if (this.shipsOnBorder == 0) {
+			this.onBorder = false;
+		}
+		else {
+			this.onBorder = true;
+		}
 		return this.onBorder;
 	}
 	
